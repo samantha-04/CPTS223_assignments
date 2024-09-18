@@ -1,0 +1,3 @@
+/mnt/c/Users/sammy/OneDrive/Documents/VSCode/223/PA1/CMakeFiles/PA1.dir
+/mnt/c/Users/sammy/OneDrive/Documents/VSCode/223/PA1/CMakeFiles/edit_cache.dir
+/mnt/c/Users/sammy/OneDrive/Documents/VSCode/223/PA1/CMakeFiles/rebuild_cache.dir
