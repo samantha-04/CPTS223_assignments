@@ -88,11 +88,11 @@ int Array<n, p>::findProfile(string user)
 template <typename n, typename p>
 void Array<n, p>::updatePoints(const n &name, p change)
 {
-    for (int i = 0; i < size; ++i) 
+    for (int i = 0; i < size; i++) 
     {
         if (names[i] == name) 
-        {  // Comparing without modifying `name`
-            points[i] += change;  // Modify points based on delta
+        {  
+            points[i] += change;  //modify points
             return;
         }
     }
@@ -101,39 +101,42 @@ void Array<n, p>::updatePoints(const n &name, p change)
 template <typename n, typename p>
 void Array<n, p>::saveProfiles(const string &filename) 
 {
-       std::ofstream file(filename);
+       ofstream file(filename);
 
-    // Check if the file opened successfully
-    if (!file.is_open()) {
-        std::cerr << "Error: Could not open " << filename << " for writing." << std::endl;
+    //check if the file opened successfully
+    if (!file.is_open()) 
+    {
+        cerr << "Error: Could not open " << filename << " for writing." << endl;
         return;
     }
 
-    // Loop through each profile and write the name and points to the file
-    for (int i = 0; i < size; ++i) {
-        file << names[i] << "," << points[i] << std::endl;  // Write name and score
+    //loop through each profile and write the name and points to the file
+    for (int i = 0; i < size; i++) 
+    {
+        file << names[i] << "," << points[i] << endl;  //write name and score
     }
 
-    file.close();  // Close the file after writing
+    file.close();  //close the file after writing
 }
 
 
-    template <typename n, typename p>
+template <typename n, typename p>
 void Array<n,p>::displayProfiles() const 
 {
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; i++) 
+    {
         cout << "Name: " << names[i] << ", Points: " << points[i] << endl;
     }
 }
 
-// Function to get the size of the array
+//function to get the size of the array
 template <typename n, typename p>
 int Array<n,p>::getSize() const 
 {
     return size;
 }
 
-// Function to get the capacity of the array
+//function to get the capacity of the array
 template <typename n, typename p>
 int Array<n,p>::getCapacity() const 
 {

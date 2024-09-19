@@ -73,7 +73,6 @@ void LinkedList<t,d>::insertAtFront(t command, d description)
     newNode->next = head;  
     head = newNode;  //update head to new node
     size++;  //increase size of list
-    std::cout << "Added command: " << command << " with description: " << description << ". List size: " << size << std::endl;
     return;
 }
 
@@ -81,9 +80,9 @@ template <typename t, typename d>
 bool LinkedList<t,d>::removeNode(t command)
 {
 
-    if (!head) return false;  // If the list is empty, nothing to remove
+    if (!head) return false;  //if the list is empty, nothing to remove
 
-    // Special case: if the head is the node to remove
+    //if the head is the node to remove
     if (head->command == command) 
     {
         Node* temp = head;
@@ -93,7 +92,7 @@ bool LinkedList<t,d>::removeNode(t command)
         return true;
     }
 
-    // Traverse the list to find the node to remove
+    //traverse the list to find the node to remove
     Node* current = head;
     while (current->next && current->next->command != command) 
     {
@@ -102,10 +101,10 @@ bool LinkedList<t,d>::removeNode(t command)
 
     if (!current->next) 
     {
-        return false;  // Command not found
+        return false;  //command not found
     }
 
-    // Remove the node
+    //remove the node
     Node* temp = current->next;
     current->next = temp->next;
     delete temp;
@@ -123,7 +122,7 @@ Node* current = head;
     {
         if (current->command == command) 
         {
-            return current->description;  // Return the description if found
+            return current->description; //return the description if found
         }
         current = current->next;
     }
@@ -137,7 +136,7 @@ t LinkedList<t, d>::getRandomCommand()
     if (isEmpty()) 
     {
         std::cerr << "Error: Linked list is empty. Cannot retrieve a random command." << std::endl;
-        return t();  // Return a default value for t
+        return t();  //return a default value if empty
     }
 
     int randomIndex = rand() % size;  // Get a random index
@@ -145,19 +144,21 @@ t LinkedList<t, d>::getRandomCommand()
 
     for (int i = 0; i < randomIndex; ++i) 
     {
-        if (current == nullptr) {
+        if (current == nullptr) 
+        {
             std::cerr << "Error: Invalid node traversal. Node is null." << std::endl;
-            return t();  // Return a default value if traversal fails
+            return t();  //return a default value if traversal fails
         }
         current = current->next;
     }
 
-    if (current == nullptr) {
+    if (current == nullptr) 
+    {
         std::cerr << "Error: Current node is null after traversal." << std::endl;
-        return t();  // Handle case where node is unexpectedly null
+        return t();  //handle case where node is null
     }
 
-    return current->command;  // Return the command at the random index
+    return current->command;  //return the command at the random index
 }
 
 
@@ -167,10 +168,11 @@ d LinkedList<t, d>::getRandomDescription()
 {
     int randomIndex = rand() % size;
     Node* current = head;
-    for (int i = 0; i < randomIndex; ++i) {
+    for (int i = 0; i < randomIndex; ++i) 
+    {
         current = current->next;
     }
-    return current->description;  // Assuming d is the type of description
+    return current->description;
 }
 
 template <typename t, typename d>
@@ -178,16 +180,18 @@ void LinkedList<t, d>::saveCommandsToFile(const std::string &filename)
 {
     std::ofstream file(filename);
 
-    if (!file.is_open()) {
+    if (!file.is_open()) 
+    {
         std::cerr << "Error: Could not open " << filename << " for writing." << std::endl;
         return;
     }
 
     Node* current = head;
-    while (current != nullptr) {
-        file << current->command << "," << current->description << std::endl;  // Write the command and description to the file
+    while (current != nullptr) 
+    {
+        file << current->command << "," << current->description << std::endl;  //write the command and description to the file
         current = current->next;
     }
 
-    file.close();  // Close the file to ensure data is saved
+    file.close();  //close file
 }

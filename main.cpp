@@ -1,7 +1,20 @@
 /*
 ADVANTAGES/DISADVANTAGES LINKED LIST
+One advantage of using a linked list for storing the commands/descriptions is that it's dynamic!
+Unlike an array, you aren't limited by a fixed number.
+
+One disadvantage of using a linked list is that it has a slower acces time than an array (O(n)).
+This is because you have to traverse the list to find the element you want to access, so it 
+can be a bit inefficent. 
 
 ADVANTAGES/DISADVANTAGES ARRAY
+One advantage of using an array for profile storage is 
+that it allows for constant-time access of elements by their index, which
+makes it efficient when you know the index of the element you want to access.
+
+One disadvantage of using an array for profile storage is that it has a fixed size,
+which can limit the number of profiles you store. You can resize, but this gets complicated
+and can use up time and memory.
 */
 
 #include <iostream>
@@ -14,12 +27,15 @@ using namespace std;
 int main()
 {
 
+    //variables 
     string userName;
     int selection;
     LinkedList<string, string> list;
-    Array<string, int> array(10); // Assuming the constructor takes an integer parameter for size
+    Array<string, int> array(10); 
     Game game;
 
+    //loading files from the game class (want to do this before the user selects an option 
+    //in case they choose to just add/remove commands)
     game.loadFiles();
 
     while (true)
@@ -58,18 +74,18 @@ int main()
                     
                     if (selection == 3)
                     {
-                        array.findProfile(userName);
+                        array.findProfile(userName); //find the profile for prev games
                     }
                     else
                     {
-                        array.addProfile(userName, 0);
+                        array.addProfile(userName, 0); //add a new profile for new games
                     }
 
                     cout << "Please enter the number of questions you would like to answer: ";
                     int numQuestions;
                     cin >> numQuestions;
 
-                    game.playGame(userName, numQuestions);
+                    game.playGame(userName, numQuestions); //play the game
 
                     break;
                 }
@@ -98,14 +114,14 @@ int main()
                     cin.ignore(); //clear the buffer
                     getline(cin, commandToDelete); //use getline in case the command has spaces
 
-                    if (list.removeNode(commandToDelete))
+                    if (list.removeNode(commandToDelete)) //if the command was found and removed
                     {
                         cout << "............." << endl;
                         cout << "The command has been removed." << endl;
                     }
-                    else
+                    else //command not in list
                     {
-                        cout << "............." << endl;
+                        cout << "............." << endl; 
                         cout << "The command was not found." << endl;
                     }
                     
@@ -114,7 +130,7 @@ int main()
                     
                 case 6: // Exit
                 {
-                    game.endGame();
+                    game.endGame(); //save the profiles
                     return 0;
                 }
 
