@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "DebugTest",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/main",  // Path to the compiled executable
+            "cwd": "${workspaceFolder}",  // Set working directory to the project root
+            "miDebuggerPath": "/usr/bin/gdb",  // Path to gdb in WSL
+            "args": [],  // Arguments if needed
+            "stopAtEntry": false,  // Set to true if you want to stop at the main function
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "externalConsole": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}

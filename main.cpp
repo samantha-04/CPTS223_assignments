@@ -1,38 +1,37 @@
-// This code was taken from https://www.techiedelight.com/queue-implementation-cpp/
-// The code has been modified from the original to provide opportunities to learn
 
-/*Poor Attributes
-1. Placing everything in a queue.h file works, but I have found that having a .h and .cpp file greatly
-aids in organizaion fluidity. 
-2. Lack of comments. For example, in the size function, I changed it to return cout becaus to me it made sense that 
-count and size were equal. Howver, the original authors idea for the size variable may have been different than mine!
-This could've been clarified in a comment. There are several other examples of this throughout.
-3. No room for increasing capacity in enqueue(). This is fine, but it could easily utilize dynamic memory and I think it 
-would be more efficient to do so. 
-4. I'm not sure if this is intended to be in the final implementation of the program, but if it was, having print statements
-for each insertion and deletion of queue elements seems redundant and unnecessary. This is what our test cases are for!
-5. There's no copy constructor, which works okay with this current program but I can imagine that adding on to this program 
-could potentially lead to crashes, especially with our dynamically allocated memory. 
-*/
-#include <iostream>
-#include <cstdlib>
-#include <limits>
-#include "testQueue.cpp"
+
+#include "AVLTree.h"
+#include "experimentFunctions.h"
+
 using namespace std;
 
-// main function
+
+
 int main()
 {
-    // call your test functions here!
-    //testSize();
-    //testIsEmpty();
-    //testIsFull();
-    //testDequeueUnderflow();
-    //testDequeue();
-    //testEnqueueOverflow();
-    //testEnqueue();
-    //testPeekUnderflow();
-    //testPeek();
-    return 0;
-}
+    // experiment 1: test BST order and AVL height condition
+    cout << "================================ Experiment 1 ================================" << endl;
+    int numIntegers = 20;
+    experiment1(numIntegers);
+    cout << endl;
 
+    // experiment 2: test whether the average depth of AVL trees is invariant to random insert/remove pair operations
+    cout << "============================ Experiment 2, Stage 1 ============================" << endl;
+
+    // Stage 1: insert random integers into AVL BST, as Figure 4.29 of textbook
+    numIntegers = 20;
+    AVLTree<int>*avl = new AVLTree<int>();
+    stage1(avl, numIntegers);
+    cout << endl;
+
+    // Stage 2: 500^2 times of random insert/delete pairs for this AVL tree, as per textbook, Figure 4.30
+    int numRandomInsertRemove = 250000;
+    cout << "========== Experiment 2, Stage 2 (after " << numRandomInsertRemove << " random insert/delete) ==========" << endl;
+    stage2(avl, numRandomInsertRemove);
+
+    // delete this avl
+    delete avl;
+
+    return 0;
+
+}
